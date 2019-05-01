@@ -3,6 +3,6 @@ LABEL MAINTAINER="Jan Guzman <janfrancisco19@gmail.com>"
 
 WORKDIR /go/src/github.com/videoeditor
 
-RUN apk add git dep
+RUN apk add git dep ffmpeg
 
 CMD ["tail", "-f", "/dev/null"]
