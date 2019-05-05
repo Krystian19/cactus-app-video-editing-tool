@@ -5,4 +5,6 @@ WORKDIR /go/src/github.com/videoeditor
 
 RUN apk add git dep ffmpeg
 
+RUN mkdir input output
+
 CMD ["tail", "-f", "/dev/null"]
