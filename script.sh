@@ -10,7 +10,7 @@ fi
 OUTPUT_FILE_PATH=$(pwd)/output
 
 # Creates output folder if it doesn't exits
-if [ -f $OUTPUT_FILE_PATH ]; then
+if ! [ -d $OUTPUT_FILE_PATH ]; then
   mkdir $OUTPUT_FILE_PATH
 fi
 
