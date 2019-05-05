@@ -1,20 +1,21 @@
-# Video Editor
+# Video Editing script
+This project is the automated editing pipeline of cactus-app
 
-Video editor docs
-
-## How to setup
-
-+ Build the image
+## How to use
++ Usage
 ```sh
-docker build --no-cache -t golang/env .
+./script.sh <input_path/input_url> <output_filename.mp4>
 ```
 
-+ Run the container
++ For example
 ```sh
-docker run --name golang -v $(pwd):/go/src/github.com/videoeditor --detach golang/env
+./script.sh input_file.mp4 output_file.mp4
 ```
 
-+ Enter the container
++ Now, measure execution time with `time`
 ```sh
-docker exec -ti golang /bin/sh
+time ./script.sh wise_man_grandchild.mp4 aloha.mp4
 ```
+
+## License
+MIT © [Jan Guzman](https://github.com/Krystian19)
