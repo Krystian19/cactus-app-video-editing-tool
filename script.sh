@@ -94,3 +94,7 @@ if [ ! $RESULT -eq 0 ]; then
   echo "ERROR: while embedding watermark"
   exit
 fi
+
+# Generate a meaningful thumbnail from a video
+# https://superuser.com/questions/538112/meaningful-thumbnails-for-a-video-using-ffmpeg
+# ffmpeg -ss 3 -i wise_man_grandchild.mp4 -vf "select=gt(scene\,0.4)" -frames:v 5 -vsync vfr -vf fps=fps=1/600 thumbnail%02d.jpg
