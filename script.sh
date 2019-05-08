@@ -56,6 +56,20 @@ if [ ! $RESULT -eq 0 ]; then
 fi
 
 echo "==================================================================================="
+echo "======================= GENERATING VIDEO THUMBNAILS ==============================="
+echo "==================================================================================="
+
+# Generate a meaningful thumbnail from a video
+# https://superuser.com/questions/538112/meaningful-thumbnails-for-a-video-using-ffmpeg
+ffmpeg -ss 3 -i $INITIAL_FILE_PATH -vf "select=gt(scene\,0.4)" -frames:v 5 -vsync vfr -vf fps=fps=1/600 ${INITIAL_FILE_PATH}%02d.jpg
+
+RESULT=$?
+if [ ! $RESULT -eq 0 ]; then
+  echo "ERROR: Could not generate video thumbnail"
+  exit
+fi
+
+echo "==================================================================================="
 echo "====================== FILE DOWNLOADED, NOW REDUCING SIZE=========================="
 echo "==================================================================================="
 
