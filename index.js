@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 const Download = require('./steps/download');
+const GenerateThumbnails = require('./steps/generateThumbnails');
 
 // Output path for the files
 const outputPath = path.join(__dirname, 'output');
@@ -22,19 +23,22 @@ program
   .command('dl <url> <output_file>')
   .usage('<url> <output_file> [options]')
   .action(function (url, output_file, cmd) {
-    const fullOutputPath = path.join(outputPath, output_file);
+    const fullOutputFilePath = path.join(outputPath, output_file);
 
     (async () => {
       try {
         // Download the video throught the provided url/path
-        await Download(url, fullOutputPath);
+        await Download(url, fullOutputFilePath);
+
+        // Generates thumbnails based on the provided video file
+        await GenerateThumbnails(fullOutputFilePath);
 
       } catch (err) {
         console.log(err)
         process.exit(1)
       }
     })();
-    
+
   })
 
 program.parse(process.argv)
