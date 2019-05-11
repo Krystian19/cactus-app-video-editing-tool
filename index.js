@@ -1,34 +1,40 @@
 #!/usr/bin/env node
 
 const program = require('commander');
+const path = require('path');
+const fs = require('fs');
+
+const Download = require('./steps/download');
+
+// Output path for the files
+const outputPath = path.join(__dirname, 'output');
+
+// Creates output directory if it doesn't exists
+if (!fs.existsSync(outputPath)) {
+  fs.mkdirSync(outputPath);
+}
 
 program
   .version('0.1.0')
-  .usage('[command]')
+  .usage('[command] [options]')
 
 program
-  .command('dl <url> <output_path>')
-  .usage('<url> <output_path> [options]')
-  .action(function (url, output, cmd) {
-    const spawn = require('child_process').spawn;
-    const ls = spawn(`ffmpeg`, [
-      '-i', url,
-      '-c', 'copy',
-      '-bsf:a', 'aac_adtstoasc',
-      `./output/${output}`
-    ]);
+  .command('dl <url> <output_file>')
+  .usage('<url> <output_file> [options]')
+  .action(function (url, output_file, cmd) {
+    const fullOutputPath = path.join(outputPath, output_file);
 
-    ls.stdout.on('data', function (data) {
-      console.log('stdout: ' + data.toString());
-    });
+    (async () => {
+      try {
+        // Download the video throught the provided url/path
+        await Download(url, fullOutputPath);
 
-    ls.stderr.on('data', function (data) {
-      console.log('stderr: ' + data.toString());
-    });
-
-    ls.on('exit', function (code) {
-      console.log('child process exited with code ' + code.toString());
-    });
+      } catch (err) {
+        console.log(err)
+        process.exit(1)
+      }
+    })();
+    
   })
 
 program.parse(process.argv)
