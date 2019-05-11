@@ -2,3 +2,4 @@
 vendor/
 *.mp4
 output/
+/node_modules

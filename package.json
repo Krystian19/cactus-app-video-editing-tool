@@ -1,0 +1,11 @@
+{
+  "name": "video_editor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Krystian19/cactus-app-video-editing-tool.git",
+  "author": "Jan Guzman <janfrancisco19@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.20.0"
+  }
+}
