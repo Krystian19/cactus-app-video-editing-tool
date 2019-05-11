@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-module.exports = async function generateThumbnails(file_path, ) {
+module.exports = async function generateThumbnails(file_path) {
   return new Promise((resolve, reject) => {
     const thumbnailOutputPath = path.join(
       path.dirname(file_path),

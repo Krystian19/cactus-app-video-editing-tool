@@ -6,9 +6,11 @@ const fs = require('fs');
 
 const Download = require('./steps/download');
 const GenerateThumbnails = require('./steps/generateThumbnails');
+const EmbedWatermark = require('./steps/embedWatermark');
 
 // Output path for the files
 const outputPath = path.join(__dirname, 'output');
+const logoPath = path.join(__dirname, 'logo.png');
 
 // Creates output directory if it doesn't exists
 if (!fs.existsSync(outputPath)) {
@@ -32,6 +34,9 @@ program
 
         // Generates thumbnails based on the provided video file
         await GenerateThumbnails(fullOutputFilePath);
+
+        // Embed the specified watermark in the video
+        await EmbedWatermark(fullOutputFilePath, logoPath)
 
       } catch (err) {
         console.log(err)
