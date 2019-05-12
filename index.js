@@ -18,12 +18,14 @@ if (!fs.existsSync(outputPath)) {
 }
 
 program
-  .version('0.1.0')
+  .version('1.0.0')
   .usage('[command] [options]')
 
 program
   .command('dl <url> <output_file>')
   .usage('<url> <output_file> [options]')
+  .option('-w, --watermark', 'Embed Watermark')
+  .option('-t, --thumbnail', 'Generate thumbnails')
   .action(function (url, output_file, cmd) {
     const fullOutputFilePath = path.join(outputPath, output_file);
 
@@ -32,11 +34,15 @@ program
         // Download the video throught the provided url/path
         await Download(url, fullOutputFilePath);
 
-        // Generates thumbnails based on the provided video file
-        await GenerateThumbnails(fullOutputFilePath);
+        if (cmd.thumbnail) {
+          // Generates thumbnails based on the provided video file
+          await GenerateThumbnails(fullOutputFilePath);
+        }
 
-        // Embed the specified watermark in the video
-        await EmbedWatermark(fullOutputFilePath, logoPath)
+        if (cmd.watermark) {
+          // Embed the specified watermark in the video
+          await EmbedWatermark(fullOutputFilePath, logoPath)
+        }
 
       } catch (err) {
         console.log(err)
