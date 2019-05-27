@@ -1,4 +1,6 @@
 # Video Editing script
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ae6331fb07014972808b53125a820964)](https://www.codacy.com/app/janfrancisco19/cactus-app-video-editing-tool?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Krystian19/cactus-app-video-editing-tool&amp;utm_campaign=Badge_Grade)
+
 This project is the automated editing pipeline of cactus-app
 
 ## Requirements
